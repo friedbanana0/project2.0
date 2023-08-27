@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 2rem;
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        input[type="number"] {
+            padding: 0.5rem;
+            width: 60%;
+            max-width: 200px;
+        }
+
+        button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #message {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mini-Game: Guess the Number</h1>
+    <p>Guess a number between 1 and 10:</p>
+    <input type="number" id="guessInput">
+    <button onclick="checkGuess()">Submit Guess</button>
+    <p id="message"></p>
+
+    <script>
+        const targetNumber = Math.floor(Math.random() * 10) + 1;
+        const jumpscareChance = 0.3;
+
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById('guessInput').value);
+
+            if (isNaN(userGuess)) {
+                setMessage('Please enter a valid number.', 'red');
+            } else {
+                if (userGuess === targetNumber) {
+                    showJumpscare();
+                } else {
+                    if (Math.random() < jumpscareChance) {
+                        showJumpscare();
+                    } else {
+                        setMessage('Wrong guess. Try again.', 'blue');
+                    }
+                }
+            }
+        }
+
+        function setMessage(text, color) {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = text;
+            messageElement.style.color = color;
+        }
+
+        function showJumpscare() {
+            const messageElement = document.getElementById('message');
+            messageElement.innerHTML = '<img src="jumpscare.jpg" alt="Jumpscare Image">';
+            // You can add more effects here if you want
+        }
+    </script>
+</body>
+</html>
